@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import { createClient } from '@supabase/supabase-js';
 //import passport from "passport";
 import  env  from "dotenv";
-import cors from "cors";
+
 // server 
 
 const app = express();
@@ -23,23 +23,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({
-  origin:'file:///D:/SAJAL/WEB%20DEV/Practise%20Projects/Login%20Page/index.html',
-  methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials:true,
-}));
 
 // GET route for login
-app.get('/api', async(req, res) => {
-  //const { username, password } = req.query;
+app.get('/api/login', async(req, res) => {
+  const { username, password } = req.query;
+
   // Check if both username and password are provided
   try {
     // Example: Retrieve data from a table
     const { data, error } = await supabase
       .from('users')
       .select('*')
-      //.eq('userid',username)
-      //.eq('password_hash',password);
+      .eq('userid',username)
+      .eq('password_hash',password);
 
     if (error) {
       return res.status(500).json({ error: 'Error fetching data from Supabase.Gve proper Username and Password' });

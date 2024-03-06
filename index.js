@@ -30,9 +30,8 @@ app.use(cors({
 }));
 
 // GET route for login
-app.get('/api/login', async(req, res) => {
-  const { username, password } = req.query;
-
+app.get('/api', async(req, res) => {
+  //const { username, password } = req.query;
   // Check if both username and password are provided
   try {
     // Example: Retrieve data from a table

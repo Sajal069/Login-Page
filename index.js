@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 //import passport from "passport";
 import  env  from "dotenv";
 //import cors from "cors";
+
 // server 
 
 const app = express();
@@ -30,22 +31,17 @@ app.use(bodyParser.json());
 
 // GET route for login
 app.get('/api', async(req, res) => {
-  //const { username, password } = req.query;
-  // Check if both username and password are provided
   try {
-    // Example: Retrieve data from a table
+    // Retrieve data from a table
     const { data, error } = await supabase
       .from('users')
       .select('*')
-      //.eq('userid',username)
-      //.eq('password_hash',password);
 
     if (error) {
       return res.status(500).json({ error: 'Error fetching data from Supabase.Gve proper Username and Password' });
     }
     console.log(data);
     res.json({ data });
-    // res.send("Express on Vercel");
 
   } catch (err) {
     console.error('Error:', err.message);
